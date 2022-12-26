@@ -11,13 +11,24 @@ using namespace std;
 
 int main()
 {
+    string line;
+
+    cout << "Type \"yes\" to continue" << endl;
+    
+    cin >> line;
+    if (line != "yes")
+    {
+        system("PAUSE");
+        return 0;
+    }
+
     char *userProfile = getenv("USERPROFILE");
     char *base_path = new char[256];
     strcpy(base_path, userProfile);
     strcat(base_path, "\\Zomboid\\mods\\default.txt");
 
     ifstream file(base_path);
-    string line;
+
     vector<char *> whitelist;
 
     while (getline(file, line))
@@ -53,7 +64,8 @@ int main()
         cout << white_id << ", ";
     }
 
-    cout << "\n" << endl;
+    cout << "\n"
+         << endl;
 
     do
     {
@@ -93,7 +105,8 @@ int main()
                     }
                 }
 
-                if(file.is_open()){
+                if (file.is_open())
+                {
                     file.close();
                 }
             }
@@ -101,6 +114,8 @@ int main()
     } while (FindNextFile(hFind, &findData));
 
     FindClose(hFind);
+
+    system("PAUSE");
 
     return 0;
 }
